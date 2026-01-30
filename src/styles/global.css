@@ -428,13 +428,11 @@ a:hover {
 /* Responsive */
 @media (max-width: 640px) {
     .hero-greeting {
-        font-size: 2.2rem;
+        font-size: 7vw;
     }
 
     .hero-greeting.animated {
-        white-space: normal;
-        animation: none;
-        opacity: 1;
+        white-space: nowrap;
     }
 
     .nav-links a {
@@ -460,7 +458,7 @@ a:hover {
 
 @media (max-width: 400px) {
     .hero-greeting {
-        font-size: 1.8rem;
+        font-size: 6.5vw;
     }
 
     .nav-links {
