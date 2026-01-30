@@ -426,7 +426,13 @@ a:hover {
 /* Responsive */
 @media (max-width: 640px) {
     .hero-greeting {
-        font-size: 2.8rem;
+        font-size: 2.2rem;
+    }
+
+    .hero-greeting.animated {
+        white-space: normal;
+        animation: none;
+        opacity: 1;
     }
 
     .nav-links a {
@@ -447,5 +453,24 @@ a:hover {
 
     .hero-image {
         max-width: 280px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-greeting {
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .nav-links li:not(:last-child)::after {
+        margin: 0 6px;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
     }
 }
