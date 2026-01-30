@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# For local development, uncomment this:
+# local_backend: true
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Excerpt", name: "excerpt", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["India Market Insights", "Indian Startups & Business", "AI Tools & Workflows", "Marketing & Content", "Personal"] }
+      - { label: "Body", name: "body", widget: "markdown" }
