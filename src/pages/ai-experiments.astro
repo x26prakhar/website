@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    name: "freewispr",
+    problem: "Most speech-to-text tools on Windows are paywalled, require cloud uploads, or produce poor results on Indian accents. Whisper AI made local transcription possible, but setting it up required Python environments and command-line work most people won't do.",
+    solution: "An open-source Windows app that runs Whisper on your machine. Drop in any audio or video file, pick a model size, get a clean transcript. No cloud, no account, no data leaving your device.",
+    github: "https://github.com/x26prakhar/freewispr",
+    publication: "",
+    live: "https://freewispr.vercel.app",
+  },
+  {
+    name: "Crore Soon",
+    problem: "Most Indian financial planning tools are designed to sell you a product. The ones that aren't assume you already understand NPS, EPF, and tax-loss harvesting. Nobody has built a simple, honest tool for the question most salaried Indians actually have: if I save this much every month, what will I have in 15 years?",
+    solution: "Enter your salary, monthly savings, and expected return. It applies the correct Indian tax slabs, accounts for standard deductions, and shows a year-by-year corpus projection. No signup, no upsell, no financial advice. Just the math, done correctly for India.",
+    github: "https://github.com/x26prakhar/crore-soon",
+    publication: "",
+    live: "https://crore-soon.netlify.app",
+  },
+  {
+    name: "Suryavansham Palace Website",
+    problem: "The family's heritage property had no online presence. Potential guests had no way to find it, understand what was on offer, or contact anyone without a personal referral.",
+    solution: "A website covering the property, rooms, amenities, and contact details. Something that could work as a first impression for people who found it through search rather than word of mouth.",
+    github: "https://github.com/x26prakhar/suryavansham-palace-website",
+    publication: "",
+    live: "https://suryavanshampalace.in",
+  },
+  {
+    name: "Unwatch",
+    problem: "Long YouTube videos, two-hour podcasts, conference talks, are often where the most useful ideas sit. But video is a slow way to consume information, and there is no easy way to get a readable version without sitting through the whole thing.",
+    solution: "Paste a YouTube URL, get a clean transcript. Searchable, skimmable, copy-pasteable. For people who read faster than they watch.",
+    github: "https://github.com/x26prakhar/unwatch",
+    publication: "",
+    live: "",
+  },
+  {
+    name: "Budget Game India",
+    problem: "The Union Budget gets covered every year as political news. Most people have no sense of the actual constraints involved, why you cannot spend more on education without cutting something else, why the fiscal deficit number matters. The trade-offs stay invisible.",
+    solution: "An interactive game where you start with the actual Union Budget and allocate it yourself across real ministries. There is no correct answer. When you move money into one line, you have to take it from another.",
+    github: "https://github.com/x26prakhar/budget-game-india",
+    publication: "",
+    live: "",
+  },
+  {
+    name: "Highlighted",
+    problem: "Interesting things you read on the web vanish the moment you close the tab. Bookmarks capture the page, not the sentence. Copying to a notes app means switching context just to paste one line.",
+    solution: "A Chrome extension that saves any selected text with a right-click. Highlights live in a full dashboard with search, tags, and sorting. Every new tab shows a random one so you actually rediscover what you saved. Optional Notion sync. No accounts, no tracking — everything stays in your browser.",
+    github: "https://github.com/x26prakhar/highlighted",
+    publication: "",
+    live: "https://chromewebstore.google.com/detail/highlighted/npphembkjdebiolmbakdnlpinekinppp",
+  },
+  {
+    name: "Where Is Your Tax Money Going?",
+    problem: "Budget breakdowns always report percentages: 15% to defence, 8% to education. These numbers mean nothing to someone who paid Rs. 80,000 in taxes last year. The scale makes it impossible to feel what is actually happening with your money.",
+    solution: "Enter your income. It calculates your approximate tax contribution and breaks it down to the rupee, how much went to healthcare, defence, infrastructure, debt interest. Makes the number personal.",
+    github: "https://github.com/x26prakhar/Where-is-your-tax-money-going-",
+    publication: "",
+    live: "",
+  },
+];
+---
+
+<BaseLayout title="AI Experiments — Prakhar Singh">
+  <section class="experiments-section">
+    <div class="container">
+      {projects.map((project) => (
+        <div class="experiment-entry">
+          <h2 class="experiment-name">{project.name}</h2>
+          <p class="experiment-problem"><span class="exp-label">Problem</span>{project.problem}</p>
+          <p class="experiment-problem"><span class="exp-label">Solution</span>{project.solution}</p>
+          <div class="experiment-links">
+            <a href={project.github} target="_blank" rel="noopener noreferrer" class="exp-link">GitHub →</a>
+            {project.publication && (
+              <a href={project.publication} target="_blank" rel="noopener noreferrer" class="exp-link">Publication →</a>
+            )}
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" class="exp-link">Live →</a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .experiments-intro {
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .experiments-section {
+    padding: 48px 0 80px;
+  }
+
+  .experiment-entry {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .experiment-entry:last-child {
+    border-bottom: none;
+  }
+
+  .experiment-name {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .experiment-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  .exp-link {
+    font-size: 0.88rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .exp-link:hover {
+    text-decoration: underline;
+  }
+
+  .experiment-problem {
+    font-size: 0.98rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+
+  .exp-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-right: 10px;
+    opacity: 0.45;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  @media (max-width: 640px) {
+    .experiments-section {
+      padding-top: 12px;
+    }
+
+    .experiment-entry {
+      padding: 20px 0;
+    }
+
+    .experiment-name {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .experiment-problem {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 4px;
+    }
+
+    .exp-label {
+      display: block;
+      margin-bottom: 2px;
+      margin-right: 0;
+      top: 0;
+    }
+
+    .experiment-links {
+      gap: 16px;
+      margin-top: 10px;
+    }
+  }
+</style>

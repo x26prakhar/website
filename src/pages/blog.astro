@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const categories = ['All', ...new Set(sorted.map(p => p.data.category).filter(Boolean))];
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout title="Blog — Prakhar Singh">
+  <section class="blog-section">
+    <div class="blog-container">
+
+      <div class="blog-meta">
+        <span class="blog-count">{sorted.length} {sorted.length === 1 ? 'post' : 'posts'}</span>
+      </div>
+
+      <div class="blog-filters" id="filters">
+        {categories.map((cat) => (
+          <button class={`filter-btn ${cat === 'All' ? 'active' : ''}`} data-cat={cat}>
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div class="blog-list" id="blog-list">
+        {sorted.length === 0 ? (
+          <p class="blog-empty">Entries coming soon.</p>
+        ) : (
+          sorted.map((post) => (
+            <a href={`/posts/${post.slug}`} class="blog-entry" data-cat={post.data.category}>
+              <span class="entry-date">{formatDate(post.data.date)}</span>
+              <h2 class="entry-title">{post.data.title}</h2>
+              {post.data.category && (
+                <span class="entry-tag">{post.data.category}</span>
+              )}
+            </a>
+          ))
+        )}
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const entries = document.querySelectorAll<HTMLElement>('.blog-entry');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cat = btn.dataset.cat;
+      entries.forEach(entry => {
+        if (cat === 'All' || entry.dataset.cat === cat) {
+          entry.style.display = '';
+        } else {
+          entry.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .blog-section {
+    padding: 48px 0 80px;
+  }
+
+  .blog-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .blog-meta {
+    margin-bottom: 20px;
+  }
+
+  .blog-count {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  .blog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px dashed var(--color-border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .filter-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+    border-style: solid;
+  }
+
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-entry {
+    display: block;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-entry:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .blog-entry:hover .entry-title {
+    color: var(--color-accent);
+  }
+
+  .entry-date {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .entry-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    transition: color 0.15s ease;
+  }
+
+  .entry-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--color-card-bg);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  .blog-empty {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    padding: 40px 0;
+  }
+
+  @media (max-width: 560px) {
+    .blog-section {
+      padding-top: 24px;
+    }
+  }
+</style>

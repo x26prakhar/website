@@ -14,8 +14,7 @@ function formatDate(date: Date) {
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-greeting animated">Hello, I'm Prakhar Singh.</h1>
-            <img src="/images/profile.jpg" alt="Prakhar Singh" class="hero-image">
+            <h1 class="hero-greeting">Hello, I'm Prakhar Singh.</h1>
         </div>
     </section>
 
@@ -32,28 +31,9 @@ function formatDate(date: Date) {
                 I write a monthly newsletter called <a href="https://www.linkedin.com/newsletters/the-elusive-impact-6973936476893241344/" target="_blank">The Elusive Impact</a> covering economics, public policy, and impact investing. My writing has appeared in Mint, Telegraph, Economic & Political Weekly, and Times of India.
             </p>
             <p>
-                If you're building in Healthcare, Agritech, Waste Management, or Circularity, feel free to <a href="/contact">reach out</a> at prakhar.singh@enzia.vc.
+                If you're building in Healthcare, Agritech, Waste Management, or Circularity, feel free to reach out at <a href="mailto:prakhar.singh@enzia.vc">prakhar.singh@enzia.vc</a>. You can also find me on <a href="https://linkedin.com/in/prakharsingh" target="_blank" rel="noopener">LinkedIn</a> and <a href="https://twitter.com/prakharsingh" target="_blank" rel="noopener">Twitter</a>.
             </p>
         </div>
     </section>
 
-    <!-- Recent Posts Section -->
-    <section class="posts-section">
-        <div class="container">
-            <h2 class="section-title">Recent Posts</h2>
-            <div class="posts-list">
-                {sortedPosts.map((post) => (
-                    <article class="post-card">
-                        <a href={`/posts/${post.slug}`}>
-                            <h3 class="post-title">{post.data.title}</h3>
-                            <p class="post-date">{formatDate(post.data.date)}</p>
-                            <p class="post-excerpt">{post.data.excerpt}</p>
-                            <span class="post-category">{post.data.category}</span>
-                        </a>
-                    </article>
-                ))}
-            </div>
-            <a href="/writing" class="view-all">View all posts →</a>
-        </div>
-    </section>
 </BaseLayout>

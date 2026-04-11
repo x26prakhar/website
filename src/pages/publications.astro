@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const publications = [
+  {
+    title: "Enzia Ventures — Impact Report",
+    outlet: "Enzia Ventures",
+    date: "2024",
+    category: "Venture Capital",
+    description: "An overview of Enzia Ventures' portfolio impact across climate, health, and education. Tracks what the capital is actually achieving.",
+    url: "https://docsend.com/view/9d9czepiaz5zcrqv",
+    color: "vc",
+  },
+  {
+    title: "The Promise of Artificial Intelligence in Delivering Better Health Outcomes",
+    outlet: "Enzia Ventures",
+    date: "June 2025",
+    category: "Health",
+    description: "How AI addresses healthcare's three core constraints: professional shortages, curative-focused care, and slow drug discovery. Where the startup opportunities lie.",
+    url: "https://www.enzia.vc/perspective-posts/the-promise-of-artificial-intelligence-in-delivering-better-health-outcomes",
+    color: "health",
+  },
+  {
+    title: "Accelerate Indian Philanthropy — Annual Report",
+    outlet: "Accelerate Indian Philanthropy",
+    date: "November 2022",
+    category: "Philanthropy",
+    description: "Annual report from Accelerate Indian Philanthropy, covering the state of strategic philanthropy in India and how capital is being deployed toward large-scale social impact.",
+    url: "https://drive.google.com/file/d/1akk5Ph1KbPhg3NrxAEHygSWjW3sEhxRa/view",
+    color: "philanthropy",
+  },
+  {
+    title: "Systemic Drivers of Foundational Learning Outcomes",
+    outlet: "Central Square Foundation",
+    date: "August 2021",
+    category: "Education",
+    description: "Primary research across five Indian states on why only 27% of Grade 3 students can read a Grade 2 text, with recommendations for fixing the foundational literacy crisis.",
+    url: "https://www.centralsquarefoundation.org/reports/systemic-drivers-of-foundational-learning-outcomes",
+    color: "education",
+  },
+  {
+    title: "Remedying Poor Student Assessment Data in India",
+    outlet: "Ideas for India",
+    date: "July 2022",
+    category: "Education",
+    description: "Significant inflation in India's reported learning outcomes perpetuates mediocrity. The case for independent evaluations, technology adoption, and a cultural shift around how schools measure learning.",
+    url: "https://www.ideasforindia.in/topics/human-development/remedying-poor-student-assessment-data-in-india",
+    color: "education",
+  },
+  {
+    title: "Phone-Based Assessment Data: Triangulating Schools' Learning Outcomes",
+    outlet: "Ideas for India",
+    date: "January 2023",
+    category: "Education",
+    description: "A study of 449 Grade 2-3 students in Uttar Pradesh finds that phone assessments produce results consistent with in-person testing. A scalable way to bypass inflated school reporting.",
+    url: "https://www.ideasforindia.in/topics/human-development/phone-based-assessment-data-triangulating-schools-learning-outcomes",
+    color: "education",
+  },
+  {
+    title: "Populist Impulses and a Question of Judicial Overreach",
+    outlet: "Mint",
+    date: "October 2019",
+    category: "Policy",
+    description: "An examination of the tension between populist political pressure and judicial independence, and what it means when courts either resist or yield to it.",
+    url: "https://www.livemint.com/opinion/online-views/populist-impulses-and-a-question-of-judicial-overreach-11571333160706.html",
+    color: "policy",
+  },
+  {
+    title: "Questioning the Dissenting Voice in the Sabarimala Verdict",
+    outlet: "Economic & Political Weekly",
+    date: "November 2018",
+    category: "Policy",
+    description: "Justice Indu Malhotra's dissent in the Sabarimala case sets a dangerous precedent. Exclusions based on menstruation are gender discrimination. Courts cannot defer to religious institutions on this.",
+    url: "https://www.epw.in/engage/article/questioning-dissenting-voice-sabarimala",
+    color: "policy",
+  },
+  {
+    title: "A Closer Look at the Lok Sabha's Productivity",
+    outlet: "The Telegraph",
+    date: "2019",
+    category: "Policy",
+    description: "Parliament's productivity is usually measured by bills passed. That's the wrong metric. A look at what actually happened inside the Lok Sabha and how to think about legislative output.",
+    url: "https://www.telegraphindia.com/opinion/acloser-look-at-the-lok-sabha-s-productivity/cid/1702110",
+    color: "policy",
+  },
+];
+
+const colorMap: Record<string, { bg: string; label: string }> = {
+  vc:           { bg: "#d2cfe8", label: "#4a4570" },
+  health:       { bg: "#c5dcd8", label: "#2a5c54" },
+  education:    { bg: "#c8d9c6", label: "#2d5c2a" },
+  policy:       { bg: "#ddd0bf", label: "#5c4520" },
+  philanthropy: { bg: "#d4cfe0", label: "#4a3d6b" },
+};
+
+---
+
+<BaseLayout title="Publications — Prakhar Singh">
+  <section class="pub-section">
+    <div class="pub-container">
+      <div class="pub-grid">
+        {publications.map((pub) => {
+          const col = colorMap[pub.color];
+          return (
+            <a href={pub.url} target="_blank" rel="noopener noreferrer" class="pub-card">
+              <div class="pub-card-top" style={`background: ${col.bg};`}>
+                <h2 class="pub-title" style={`color: ${col.label};`}>{pub.title}</h2>
+                <span class="pub-outlet" style={`color: ${col.label};`}>Commissioned for: {pub.outlet}</span>
+              </div>
+              <div class="pub-card-body">
+                <p class="pub-desc">{pub.description}</p>
+              </div>
+              <div class="pub-card-footer">
+                <span class="pub-read">Read →</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .pub-section {
+    padding: 48px 0 80px;
+  }
+
+  .pub-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 0;
+  }
+
+  .pub-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-bottom: 20px;
+  }
+
+  .pub-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+  }
+
+  .pub-card-top {
+    padding: 20px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pub-title {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .pub-outlet {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  .pub-card-body {
+    padding: 18px 22px;
+  }
+
+  .pub-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .pub-card-footer {
+    padding: 12px 22px 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pub-read {
+    font-size: 0.78rem;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .pub-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pub-section {
+      padding-top: 24px;
+    }
+
+    .pub-card {
+      margin-bottom: 16px;
+    }
+  }
+</style>
