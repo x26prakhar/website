@@ -6,5 +6,5 @@ export default defineConfig({
   integrations: [mdx()],
   site: 'https://prakhar-website-astro.vercel.app',
   adapter: vercel(),
-  output: 'hybrid',
+  output: 'static',
 });
