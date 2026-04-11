@@ -2,7 +2,7 @@ backend:
   name: github
   repo: x26prakhar/website
   branch: main
-  base_url: https://prakhar-website-astro.vercel.app
+  base_url: https://prakharsingh.vercel.app
   auth_endpoint: api/auth
 
 media_folder: public/images
