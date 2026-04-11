@@ -6,7 +6,7 @@ const posts = defineCollection({
     title: z.string(),
     date: z.date(),
     excerpt: z.string().optional(),
-    category: z.string(),
+    category: z.union([z.string(), z.array(z.string())]).transform(val => Array.isArray(val) ? val : [val]),
     url: z.string().url().optional(),
   }),
 });
