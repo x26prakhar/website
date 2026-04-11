@@ -162,6 +162,10 @@ a:hover {
     line-height: 1.9;
 }
 
+.about p:last-of-type {
+    margin-bottom: 0;
+}
+
 .about a {
     color: var(--color-accent);
 }
