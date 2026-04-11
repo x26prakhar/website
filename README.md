@@ -2,13 +2,13 @@
 
 # Prakhar Singh
 
-**VC · Writer · Builder**
+**MBA (PGPX) at IIM Ahmedabad · Former VC · Builder**
 
-[![Website](https://img.shields.io/badge/website-live-0078d4?style=flat-square)](https://comforting-speculoos-d46c49.netlify.app)
-[![Enzia Ventures](https://img.shields.io/badge/work-Enzia%20Ventures-22c55e?style=flat-square)](https://enzia.vc)
-[![Newsletter](https://img.shields.io/badge/newsletter-The%20Elusive%20Impact-f59e0b?style=flat-square)](https://www.linkedin.com/newsletters/the-elusive-impact-6973936476893241344/)
+[![Website](https://img.shields.io/badge/website-live-0078d4?style=flat-square)](https://prakharsingh.vercel.app)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-prakharsingh96-0a66c2?style=flat-square)](https://www.linkedin.com/in/prakharsingh96/)
+[![Instagram](https://img.shields.io/badge/Instagram-prakhar.vc-e1306c?style=flat-square)](https://www.instagram.com/prakhar.vc/)
 
-[About](#about) · [Writing](#writing) · [Tech Stack](#tech-stack) · [Run Locally](#run-locally)
+[About](#about) · [Pages](#pages) · [Tech Stack](#tech-stack) · [Run Locally](#run-locally)
 
 </div>
 
@@ -16,9 +16,7 @@
 
 ## About
 
-Personal website for Prakhar Singh — VC at [Enzia Ventures](https://enzia.vc), investing in founders building for Climate, Health, and Education across India.
-
-Previously at Yunus Social Business, The Convergence Foundation (Accelerate Indian Philanthropy & Central Square Foundation), and PRS Legislative Research (LAMP Fellow).
+Personal website for Prakhar Singh — currently at [IIM Ahmedabad](https://www.iima.ac.in/) (MBA/PGPX). Previously VC at [Enzia Ventures](https://enzia.vc) and [Yunus Social Business](https://www.yunussocialbusiness.com/), philanthropy and education work at [The Convergence Foundation](https://www.theconvergencefoundation.org/) ([Accelerate Indian Philanthropy](https://www.indianphilanthropy.org/) · [Central Square Foundation](https://www.centralsquarefoundation.org/)), and policy research at [PRS Legislative Research](https://prsindia.org/) as a LAMP Fellow.
 
 ---
 
@@ -26,17 +24,12 @@ Previously at Yunus Social Business, The Convergence Foundation (Accelerate Indi
 
 | Page | Description |
 |------|-------------|
-| `/` | Home — intro, background, recent posts |
-| `/writing` | All blog posts |
-| `/posts/[slug]` | Individual post pages |
-| `/contact` | Get in touch |
-| `/wall-of-love` | Testimonials |
-
----
-
-## Writing
-
-Monthly newsletter [The Elusive Impact](https://www.linkedin.com/newsletters/the-elusive-impact-6973936476893241344/) — covering economics, public policy, and impact investing. Writing has appeared in Mint, Telegraph, Economic & Political Weekly, and Times of India.
+| `/` | About — bio, background, contact |
+| `/blog` | Blog posts (external links + internal essays) |
+| `/publications` | Commissioned writing and media appearances |
+| `/ai-experiments` | AI projects and experiments |
+| `/creative-projects` | Creative work |
+| `/posts/[slug]` | Individual post pages (for posts written on-site) |
 
 ---
 
@@ -44,12 +37,12 @@ Monthly newsletter [The Elusive Impact](https://www.linkedin.com/newsletters/the
 
 | Component | Technology |
 |-----------|------------|
-| Framework | [Astro](https://astro.build) |
+| Framework | [Astro](https://astro.build) 5.x |
 | Language | TypeScript |
 | Content | MDX (Astro Content Collections) |
-| CMS | Netlify CMS (`/admin`) |
+| CMS | Sveltia CMS (`/admin`) via GitHub OAuth |
 | Styling | Global CSS |
-| Deployment | Netlify (primary) · Vercel |
+| Deployment | Vercel (auto-deploys on push to `main`) |
 
 ---
 
@@ -58,13 +51,12 @@ Monthly newsletter [The Elusive Impact](https://www.linkedin.com/newsletters/the
 ```
 website/
 ├── src/
-│   ├── components/     # Reusable Astro components
 │   ├── content/posts/  # Blog posts in MDX
-│   ├── layouts/        # Page layouts
-│   ├── pages/          # Routes: index, writing, contact, wall-of-love
+│   ├── layouts/        # BaseLayout
+│   ├── pages/          # index, blog, publications, ai-experiments, creative-projects
 │   └── styles/         # Global CSS
 ├── public/
-│   ├── admin/          # Netlify CMS config
+│   ├── admin/          # Sveltia CMS config
 │   └── images/         # Static assets
 ├── astro.config.mjs
 └── tsconfig.json
@@ -85,14 +77,14 @@ Open `http://localhost:4321`
 
 ---
 
-## Deploy
+## Adding a Blog Post
 
-Netlify auto-deploys on push to `main`.
+Pass a URL to the `/add-blog-post` Claude skill — it fetches metadata, creates the MDX file, commits, and pushes automatically. External posts (LinkedIn, Substack) link out to the original source; posts written for this site get their own page.
 
 ---
 
 <div align="center">
-  Built by <a href="https://enzia.vc">Prakhar Singh</a>
+  <a href="https://prakharsingh.vercel.app">prakharsingh.vercel.app</a>
   &nbsp;·&nbsp;
   <a href="https://www.instagram.com/prakhar.vc/">@prakhar.vc</a>
   &nbsp;·&nbsp;
