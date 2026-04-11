@@ -33,7 +33,7 @@ function formatDate(date: Date) {
           <p class="blog-empty">Entries coming soon.</p>
         ) : (
           sorted.map((post) => (
-            <a href={`/posts/${post.slug}`} class="blog-entry" data-cat={post.data.category}>
+            <a href={post.data.url ?? `/posts/${post.slug}`} class="blog-entry" data-cat={post.data.category} target={post.data.url ? '_blank' : undefined} rel={post.data.url ? 'noopener noreferrer' : undefined}>
               <span class="entry-date">{formatDate(post.data.date)}</span>
               <h2 class="entry-title">{post.data.title}</h2>
               {post.data.category && (
