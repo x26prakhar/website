@@ -93,16 +93,26 @@ const colorMap: Record<string, { bg: string; label: string }> = {
   philanthropy: { bg: "#d4cfe0", label: "#4a3d6b" },
 };
 
+const categories = ['All', ...new Set(publications.map(p => p.category))];
 ---
 
 <BaseLayout title="Publications — Prakhar Singh">
   <section class="pub-section">
     <div class="pub-container">
-      <div class="pub-grid">
+
+      <div class="pub-filters" id="filters">
+        {categories.map((cat) => (
+          <button class={`filter-btn ${cat === 'All' ? 'active' : ''}`} data-cat={cat}>
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div class="pub-grid" id="pub-grid">
         {publications.map((pub) => {
           const col = colorMap[pub.color];
           return (
-            <a href={pub.url} target="_blank" rel="noopener noreferrer" class="pub-card">
+            <a href={pub.url} target="_blank" rel="noopener noreferrer" class="pub-card" data-cat={pub.category}>
               <div class="pub-card-top" style={`background: ${col.bg};`}>
                 <h2 class="pub-title" style={`color: ${col.label};`}>{pub.title}</h2>
                 <span class="pub-outlet" style={`color: ${col.label};`}>Commissioned for: {pub.outlet}</span>
@@ -121,6 +131,27 @@ const colorMap: Record<string, { bg: string; label: string }> = {
   </section>
 </BaseLayout>
 
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.pub-card');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cat = btn.dataset.cat;
+      cards.forEach(card => {
+        if (cat === 'All' || card.dataset.cat === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 <style>
   .pub-section {
     padding: 48px 0 80px;
@@ -130,6 +161,37 @@ const colorMap: Record<string, { bg: string; label: string }> = {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 24px;
+  }
+
+  .pub-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px dashed var(--color-border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .filter-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+    border-style: solid;
   }
 
   .pub-grid {
