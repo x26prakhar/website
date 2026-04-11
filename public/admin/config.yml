@@ -21,4 +21,4 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Excerpt", name: "excerpt", widget: "string", required: false }
       - { label: "Category", name: "category", widget: "select", options: ["VC and Startups", "AI", "Economics and Public Policy", "Personal", "Others"], multiple: true }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
