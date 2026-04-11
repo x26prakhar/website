@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   integrations: [mdx()],
-  site: 'https://prakhar.vercel.app',
+  site: 'https://prakhar-website-astro.vercel.app',
   adapter: vercel(),
   output: 'static',
 });
