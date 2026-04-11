@@ -6,7 +6,7 @@ const publications = [
     title: "Enzia Ventures — Impact Report",
     outlet: "Enzia Ventures",
     date: "2024",
-    category: "Venture Capital",
+    category: ["VC and Startups"],
     description: "An overview of Enzia Ventures' portfolio impact across climate, health, and education. Tracks what the capital is actually achieving.",
     url: "https://docsend.com/view/9d9czepiaz5zcrqv",
     color: "vc",
@@ -15,7 +15,7 @@ const publications = [
     title: "The Promise of Artificial Intelligence in Delivering Better Health Outcomes",
     outlet: "Enzia Ventures",
     date: "June 2025",
-    category: "Health",
+    category: ["AI", "VC and Startups"],
     description: "How AI addresses healthcare's three core constraints: professional shortages, curative-focused care, and slow drug discovery. Where the startup opportunities lie.",
     url: "https://www.enzia.vc/perspective-posts/the-promise-of-artificial-intelligence-in-delivering-better-health-outcomes",
     color: "health",
@@ -24,7 +24,7 @@ const publications = [
     title: "Accelerate Indian Philanthropy — Annual Report",
     outlet: "Accelerate Indian Philanthropy",
     date: "November 2022",
-    category: "Philanthropy",
+    category: ["VC and Startups"],
     description: "Annual report from Accelerate Indian Philanthropy, covering the state of strategic philanthropy in India and how capital is being deployed toward large-scale social impact.",
     url: "https://drive.google.com/file/d/1akk5Ph1KbPhg3NrxAEHygSWjW3sEhxRa/view",
     color: "philanthropy",
@@ -33,7 +33,7 @@ const publications = [
     title: "Systemic Drivers of Foundational Learning Outcomes",
     outlet: "Central Square Foundation",
     date: "August 2021",
-    category: "Education",
+    category: ["Economics and Public Policy"],
     description: "Primary research across five Indian states on why only 27% of Grade 3 students can read a Grade 2 text, with recommendations for fixing the foundational literacy crisis.",
     url: "https://www.centralsquarefoundation.org/reports/systemic-drivers-of-foundational-learning-outcomes",
     color: "education",
@@ -42,7 +42,7 @@ const publications = [
     title: "Remedying Poor Student Assessment Data in India",
     outlet: "Ideas for India",
     date: "July 2022",
-    category: "Education",
+    category: ["Economics and Public Policy"],
     description: "Significant inflation in India's reported learning outcomes perpetuates mediocrity. The case for independent evaluations, technology adoption, and a cultural shift around how schools measure learning.",
     url: "https://www.ideasforindia.in/topics/human-development/remedying-poor-student-assessment-data-in-india",
     color: "education",
@@ -51,7 +51,7 @@ const publications = [
     title: "Phone-Based Assessment Data: Triangulating Schools' Learning Outcomes",
     outlet: "Ideas for India",
     date: "January 2023",
-    category: "Education",
+    category: ["Economics and Public Policy"],
     description: "A study of 449 Grade 2-3 students in Uttar Pradesh finds that phone assessments produce results consistent with in-person testing. A scalable way to bypass inflated school reporting.",
     url: "https://www.ideasforindia.in/topics/human-development/phone-based-assessment-data-triangulating-schools-learning-outcomes",
     color: "education",
@@ -60,7 +60,7 @@ const publications = [
     title: "Populist Impulses and a Question of Judicial Overreach",
     outlet: "Mint",
     date: "October 2019",
-    category: "Policy",
+    category: ["Economics and Public Policy"],
     description: "An examination of the tension between populist political pressure and judicial independence, and what it means when courts either resist or yield to it.",
     url: "https://www.livemint.com/opinion/online-views/populist-impulses-and-a-question-of-judicial-overreach-11571333160706.html",
     color: "policy",
@@ -69,7 +69,7 @@ const publications = [
     title: "Questioning the Dissenting Voice in the Sabarimala Verdict",
     outlet: "Economic & Political Weekly",
     date: "November 2018",
-    category: "Policy",
+    category: ["Economics and Public Policy"],
     description: "Justice Indu Malhotra's dissent in the Sabarimala case sets a dangerous precedent. Exclusions based on menstruation are gender discrimination. Courts cannot defer to religious institutions on this.",
     url: "https://www.epw.in/engage/article/questioning-dissenting-voice-sabarimala",
     color: "policy",
@@ -78,7 +78,7 @@ const publications = [
     title: "A Closer Look at the Lok Sabha's Productivity",
     outlet: "The Telegraph",
     date: "2019",
-    category: "Policy",
+    category: ["Economics and Public Policy"],
     description: "Parliament's productivity is usually measured by bills passed. That's the wrong metric. A look at what actually happened inside the Lok Sabha and how to think about legislative output.",
     url: "https://www.telegraphindia.com/opinion/acloser-look-at-the-lok-sabha-s-productivity/cid/1702110",
     color: "policy",
@@ -93,7 +93,7 @@ const colorMap: Record<string, { bg: string; label: string }> = {
   philanthropy: { bg: "#d4cfe0", label: "#4a3d6b" },
 };
 
-const categories = ['All', ...new Set(publications.map(p => p.category))];
+const categories = ['All', ...new Set(publications.flatMap(p => p.category))];
 ---
 
 <BaseLayout title="Publications — Prakhar Singh">
@@ -112,7 +112,7 @@ const categories = ['All', ...new Set(publications.map(p => p.category))];
         {publications.map((pub) => {
           const col = colorMap[pub.color];
           return (
-            <a href={pub.url} target="_blank" rel="noopener noreferrer" class="pub-card" data-cat={pub.category}>
+            <a href={pub.url} target="_blank" rel="noopener noreferrer" class="pub-card" data-cats={JSON.stringify(pub.category)}>
               <div class="pub-card-top" style={`background: ${col.bg};`}>
                 <h2 class="pub-title" style={`color: ${col.label};`}>{pub.title}</h2>
                 <span class="pub-outlet" style={`color: ${col.label};`}>Commissioned for: {pub.outlet}</span>
@@ -142,7 +142,8 @@ const categories = ['All', ...new Set(publications.map(p => p.category))];
 
       const cat = btn.dataset.cat;
       cards.forEach(card => {
-        if (cat === 'All' || card.dataset.cat === cat) {
+        const cats: string[] = JSON.parse(card.dataset.cats || '[]');
+        if (cat === 'All' || cats.includes(cat!)) {
           card.style.display = '';
         } else {
           card.style.display = 'none';
