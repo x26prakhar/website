@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Preview — Option A vs Option B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; background: #e5e5e5; }
+
+  .label-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    background: #111;
+    color: white;
+    text-align: center;
+  }
+  .label-bar div {
+    flex: 1;
+    padding: 12px;
+    font-size: 13px;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+    border-right: 1px solid #333;
+  }
+  .label-bar div:last-child { border-right: none; }
+  .label-bar .current { background: #333; }
+  .label-bar .a { background: #1a2e1f; }
+  .label-bar .b { background: #0f1e33; }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 100vh;
+  }
+
+  /* ===================== SHARED MOCK STRUCTURE ===================== */
+  .site {
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  .site nav {
+    padding: 28px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .site nav span {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--text);
+    margin: 0 14px;
+    opacity: 0.75;
+  }
+  .site nav span.active {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .site .hero {
+    padding: 52px 40px 28px;
+    text-align: center;
+    background: var(--bg);
+  }
+  .site .hero h1 {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: var(--display-weight);
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .site .hero .avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--avatar-bg);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+  }
+
+  .site .about {
+    padding: 36px 40px;
+    background: var(--bg);
+  }
+  .site .about p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .site .about a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-muted);
+  }
+
+  .site .posts {
+    padding: 36px 40px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+  .site .posts h2 {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: var(--display-weight);
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .site .post-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .site .post-item:last-child { border-bottom: none; }
+  .site .post-item .ptitle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .site .post-item .pmeta {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .site .post-item .pcat {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 10px;
+    background: var(--tag-bg);
+    border-radius: 20px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .site footer {
+    padding: 24px 40px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ===================== CURRENT (your site now) ===================== */
+  .current-site {
+    --bg: #fffaf0;
+    --text: #1a1a1a;
+    --text-secondary: #333;
+    --text-muted: #666;
+    --accent: #b8860b;
+    --accent-muted: rgba(184,134,11,0.3);
+    --border: #eee;
+    --tag-bg: #fafafa;
+    --avatar-bg: #f0e8d0;
+    --font-display: 'Caveat', cursive;
+    --font-body: 'Source Serif 4', Georgia, serif;
+    --display-weight: 400;
+    background: var(--bg);
+  }
+
+  /* ===================== OPTION A — Editorial Green ===================== */
+  .option-a {
+    --bg: #f5f2ee;
+    --text: #1c1c1c;
+    --text-secondary: #3a3a3a;
+    --text-muted: #777;
+    --accent: #2d6a4f;
+    --accent-muted: rgba(45,106,79,0.25);
+    --border: #e0dbd4;
+    --tag-bg: #ece8e2;
+    --avatar-bg: #d8ede4;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Source Serif 4', Georgia, serif;
+    --display-weight: 500;
+    background: var(--bg);
+  }
+  .option-a .hero h1 { font-style: italic; letter-spacing: -0.01em; }
+
+  /* ===================== OPTION B — Navy Modern ===================== */
+  .option-b {
+    --bg: #ffffff;
+    --text: #111827;
+    --text-secondary: #374151;
+    --text-muted: #9ca3af;
+    --accent: #1d3557;
+    --accent-muted: rgba(29,53,87,0.2);
+    --border: #e5e7eb;
+    --tag-bg: #f3f4f6;
+    --avatar-bg: #dce6f5;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+    --display-weight: 400;
+    background: var(--bg);
+  }
+  .option-b .hero h1 { letter-spacing: -0.02em; }
+  .option-b .about p { font-size: 0.95rem; line-height: 1.75; }
+</style>
+</head>
+<body>
+
+<div class="label-bar">
+  <div class="current">CURRENT — Caveat + Cream + Gold</div>
+  <div class="a">OPTION A — Cormorant + Parchment + Forest Green</div>
+  <div class="b">OPTION B — DM Serif + White + Navy</div>
+</div>
+
+<div class="cols">
+
+  <!-- CURRENT -->
+  <div class="site current-site">
+    <nav>
+      <span class="active">home</span>
+      <span>writing</span>
+      <span>wall of love</span>
+      <span>contact</span>
+    </nav>
+    <div class="hero">
+      <h1>Hello, I'm Prakhar Singh.</h1>
+      <div class="avatar">🧑</div>
+    </div>
+    <div class="about">
+      <p>I'm a VC at <a href="#">Enzia Ventures</a>, investing in founders building for Climate, Health, and Education.</p>
+      <p>Previously at <a href="#">Yunus Social Business</a>, The Convergence Foundation, and PRS Legislative Research.</p>
+      <p>I write a monthly newsletter called <a href="#">The Elusive Impact</a> on economics, public policy, and impact investing.</p>
+    </div>
+    <div class="posts">
+      <h2>Recent Posts</h2>
+      <div class="post-item">
+        <div class="ptitle">Testing Opportunities in Agritech</div>
+        <div class="pmeta">April 10, 2026</div>
+        <div class="pcat">AI Tools & Workflows</div>
+      </div>
+      <div class="post-item">
+        <div class="ptitle">Hello, my name is Prakhar Singh</div>
+        <div class="pmeta">March 28, 2026</div>
+        <div class="pcat">Personal</div>
+      </div>
+    </div>
+    <footer>© 2026 Prakhar Singh</footer>
+  </div>
+
+  <!-- OPTION A -->
+  <div class="site option-a">
+    <nav>
+      <span class="active">home</span>
+      <span>writing</span>
+      <span>wall of love</span>
+      <span>contact</span>
+    </nav>
+    <div class="hero">
+      <h1>Hello, I'm Prakhar Singh.</h1>
+      <div class="avatar">🧑</div>
+    </div>
+    <div class="about">
+      <p>I'm a VC at <a href="#">Enzia Ventures</a>, investing in founders building for Climate, Health, and Education.</p>
+      <p>Previously at <a href="#">Yunus Social Business</a>, The Convergence Foundation, and PRS Legislative Research.</p>
+      <p>I write a monthly newsletter called <a href="#">The Elusive Impact</a> on economics, public policy, and impact investing.</p>
+    </div>
+    <div class="posts">
+      <h2>Recent Posts</h2>
+      <div class="post-item">
+        <div class="ptitle">Testing Opportunities in Agritech</div>
+        <div class="pmeta">April 10, 2026</div>
+        <div class="pcat">AI Tools & Workflows</div>
+      </div>
+      <div class="post-item">
+        <div class="ptitle">Hello, my name is Prakhar Singh</div>
+        <div class="pmeta">March 28, 2026</div>
+        <div class="pcat">Personal</div>
+      </div>
+    </div>
+    <footer>© 2026 Prakhar Singh</footer>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="site option-b">
+    <nav>
+      <span class="active">home</span>
+      <span>writing</span>
+      <span>wall of love</span>
+      <span>contact</span>
+    </nav>
+    <div class="hero">
+      <h1>Hello, I'm Prakhar Singh.</h1>
+      <div class="avatar">🧑</div>
+    </div>
+    <div class="about">
+      <p>I'm a VC at <a href="#">Enzia Ventures</a>, investing in founders building for Climate, Health, and Education.</p>
+      <p>Previously at <a href="#">Yunus Social Business</a>, The Convergence Foundation, and PRS Legislative Research.</p>
+      <p>I write a monthly newsletter called <a href="#">The Elusive Impact</a> on economics, public policy, and impact investing.</p>
+    </div>
+    <div class="posts">
+      <h2>Recent Posts</h2>
+      <div class="post-item">
+        <div class="ptitle">Testing Opportunities in Agritech</div>
+        <div class="pmeta">April 10, 2026</div>
+        <div class="pcat">AI Tools & Workflows</div>
+      </div>
+      <div class="post-item">
+        <div class="ptitle">Hello, my name is Prakhar Singh</div>
+        <div class="pmeta">March 28, 2026</div>
+        <div class="pcat">Personal</div>
+      </div>
+    </div>
+    <footer>© 2026 Prakhar Singh</footer>
+  </div>
+
+</div>
+</body>
+</html>

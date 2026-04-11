@@ -1,9 +1,11 @@
-export default async function handler(req, res) {
-  const { code } = req.query;
+export const prerender = false;
+
+export async function GET({ request }) {
+  const url = new URL(request.url);
+  const code = url.searchParams.get('code');
 
   if (!code) {
-    res.status(400).send('Missing code parameter');
-    return;
+    return new Response('Missing code parameter', { status: 400 });
   }
 
   const response = await fetch('https://github.com/login/oauth/access_token', {
@@ -25,8 +27,8 @@ export default async function handler(req, res) {
     ? `authorization:github:error:${JSON.stringify(data)}`
     : `authorization:github:success:${JSON.stringify({ token: data.access_token, provider: 'github' })}`;
 
-  res.setHeader('Content-Type', 'text/html');
-  res.send(`<!DOCTYPE html>
+  return new Response(
+    `<!DOCTYPE html>
 <html>
 <body>
 <script>
@@ -39,5 +41,7 @@ export default async function handler(req, res) {
   })();
 </script>
 </body>
-</html>`);
+</html>`,
+    { headers: { 'Content-Type': 'text/html' } }
+  );
 }

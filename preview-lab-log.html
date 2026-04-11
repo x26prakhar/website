@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Experiments — Lab Log Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f5f2ee;
+    color: #1c1c1c;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    padding: 28px 0;
+    text-align: center;
+    border-bottom: 1px solid #e0dbd4;
+  }
+  nav span {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    color: #1c1c1c;
+    margin: 0 14px;
+    opacity: 0.6;
+  }
+  nav span.active {
+    opacity: 1;
+    color: #2d6a4f;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .page-header {
+    padding: 56px 0 12px;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #1c1c1c;
+    margin-bottom: 12px;
+  }
+
+  .page-header p {
+    color: #777;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .log {
+    padding: 40px 0 80px;
+  }
+
+  .year-group {
+    margin-bottom: 48px;
+  }
+
+  .year-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0dbd4;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 24px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid #ede8e2;
+  }
+  .entry:last-child { border-bottom: none; }
+
+  .entry-left {}
+
+  .entry-name {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #1c1c1c;
+    margin-bottom: 4px;
+  }
+
+  .entry-desc {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.65;
+  }
+
+  .entry-learned {
+    font-size: 0.88rem;
+    color: #888;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .status {
+    font-size: 0.75rem;
+    font-family: 'Source Serif 4', Georgia, serif;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .status.working    { background: #d8ede4; color: #2d6a4f; }
+  .status.progress   { background: #e8e8f5; color: #3d3d8f; }
+  .status.abandoned  { background: #f0ebe5; color: #999; }
+  .status.gifted     { background: #fdf0e0; color: #c07a20; }
+
+  footer {
+    padding: 24px 0;
+    text-align: center;
+    border-top: 1px solid #e0dbd4;
+    font-size: 0.82rem;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span>About Me</span>
+  <span>AI Experiments</span>
+  <span class="active">Publications</span>
+  <span>Blog</span>
+  <span>Contact</span>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>AI Experiments.</h1>
+    <p>A running log of things I've built, broken, and learned from — using AI tools. Not all of these are finished. That's the point.</p>
+  </div>
+
+  <div class="log">
+
+    <div class="year-group">
+      <div class="year-label">2025 — ongoing</div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">Note Taking App</div>
+          <div class="entry-desc">A personal note-taking tool built around how I actually think — capture fast, organise later.</div>
+          <div class="entry-learned">Learned: context windows change how you structure information.</div>
+        </div>
+        <span class="status progress">in progress</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">freewispr</div>
+          <div class="entry-desc">Voice-to-text dictation tool — trying to replace typing for first drafts.</div>
+          <div class="entry-learned">Learned: voice input needs a lot of post-processing to be useful.</div>
+        </div>
+        <span class="status working">working</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">Instagram Content Pipeline</div>
+          <div class="entry-desc">Automated content creation workflow for Instagram using AI — ideation to draft in one go.</div>
+        </div>
+        <span class="status working">working</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">WhatsApp MCP</div>
+          <div class="entry-desc">Connected WhatsApp to Claude via MCP so I can query and search my chats.</div>
+          <div class="entry-learned">Learned: MCP is genuinely underrated as a local tool interface.</div>
+        </div>
+        <span class="status working">working</span>
+      </div>
+
+    </div>
+
+    <div class="year-group">
+      <div class="year-label">2025 — earlier</div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">YouTube Summarizer</div>
+          <div class="entry-desc">Paste a YouTube link, get a structured summary. Built to save time on long interviews.</div>
+        </div>
+        <span class="status working">working</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">YouTube to Text</div>
+          <div class="entry-desc">Transcript extractor — pulls clean text from any YouTube video for further processing.</div>
+        </div>
+        <span class="status working">working</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">Highlight Notes Extension</div>
+          <div class="entry-desc">Chrome extension to highlight text on any webpage and save it to a personal note store.</div>
+        </div>
+        <span class="status abandoned">abandoned</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">Financial Planning Tool</div>
+          <div class="entry-desc">Personal finance modeller — net worth projections, scenario planning.</div>
+        </div>
+        <span class="status working">working</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">Fiscal Game 2026</div>
+          <div class="entry-desc">An interactive simulation of India's Union Budget — make spending decisions, see consequences.</div>
+          <div class="entry-learned">Learned: game mechanics are surprisingly hard to make feel fair.</div>
+        </div>
+        <span class="status gifted">gave away</span>
+      </div>
+
+      <div class="entry">
+        <div class="entry-left">
+          <div class="entry-name">Suryavansham Apartments</div>
+          <div class="entry-desc">Built a simple site + info tool for a family real estate project.</div>
+        </div>
+        <span class="status gifted">gave away</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Prakhar Singh</footer>
+
+</body>
+</html>

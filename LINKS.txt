@@ -1,0 +1,24 @@
+PRAKHAR SINGH WEBSITE - QUICK REFERENCE
+========================================
+
+LIVE SITE
+https://comforting-speculoos-d46c49.netlify.app/
+
+CMS (Visual Editor)
+https://comforting-speculoos-d46c49.netlify.app/admin/
+
+GITHUB REPO
+https://github.com/x26prakhar/website
+
+NETLIFY DASHBOARD
+https://app.netlify.com/
+
+PUBLISH FROM TERMINAL
+Type /publish in Claude Code to create a new blog post
+
+CATEGORIES FOR POSTS
+- India Market Insights
+- Indian Startups & Business
+- AI Tools & Workflows
+- Marketing & Content
+- Personal
